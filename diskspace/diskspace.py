@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+from contracts import contract, new_contract
+from contract_validations import *
 
 import argparse
 import os
@@ -36,10 +38,11 @@ args = parser.parse_args()
 
 # ==== Disk Space ====
 
+@contract(command='valid_command', returns='str')
 def subprocess_check_output(command):
     return subprocess.check_output(command.strip().split(' '))
 
-
+@contract(blocks='int,>0', returns='str')
 def bytes_to_readable(blocks):
     byts = blocks * 512
     readable_bytes = byts
